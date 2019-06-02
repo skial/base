@@ -1,0 +1,35 @@
+-lib tink_unittest
+
+-cp src
+-cp tests
+
+-debug
+-dce full
+-D analyzer-optimize
+
+-main Main
+
+--each
+
+-lib hxnodejs
+-js bin/base.js
+
+--next
+
+# FATAL ERROR :  Failed to load function std@bytes_compare16
+# Unless you download version 1.10+ from the HashLink 
+# AppVeyor last successful build artifacts page.
+-hl bin/base.hl
+
+#--next
+
+# Stackoverflow 
+#-neko bin/base.n
+
+--next
+
+-php bin/php
+
+--next
+
+-python bin/base.py
