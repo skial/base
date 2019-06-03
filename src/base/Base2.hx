@@ -4,7 +4,6 @@ import base.Alphabet.BASE2;
 
 using haxe.io.Bytes;
 
-// https://tools.ietf.org/html/rfc4648#section-6
 class Base2 extends BaseCode {
 
     private override function get_BASE():Int return 2;

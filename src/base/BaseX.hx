@@ -1,6 +1,7 @@
 package base;
 
 import haxe.io.BytesBuffer;
+
 using StringTools;
 using haxe.io.Bytes;
 
@@ -54,39 +55,6 @@ class BaseX {
         if (source.length == 0) return source;
 
         var data = source.getData();
-        
-        /*var digits = [0];
-
-        for (i in 0...source.length) {
-            var carry = data.fastGet(i);
-
-            for (j in 0...digits.length) {
-                carry += digits[j] << 8;
-                digits[j] = carry % BASE;
-                carry = Math.floor(carry / BASE);
-            }
-
-            while (carry > 0) {
-                digits.push(carry % BASE);
-                carry = Math.floor(carry / BASE);
-            }
-        }
-
-        var str = new BytesBuffer();
-
-        var k = 0;
-        while (data.fastGet(k) == 0 && k < source.length -1) {
-            str.addString(LEADER);
-            k++;
-        }
-
-        var q = digits.length-1;
-        while (q >= 0) {
-            str.addByte(BASEMAP.get(digits[q]));
-            q--;
-        }
-
-        return str.getBytes();*/
 
         var zeroes = 0;
         var length = 0;
