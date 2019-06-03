@@ -1,35 +1,35 @@
 # base
 > A collection of various base encodings.
 
-| base  | padding | zero compression | lower case |
+### Overview
+| Base  | padding | zero compression | lower case |
 |- |- |- |-
-| Base2 | ❌ | ✔ | ❌ |
-| Base8 | ❌ | ✔ | ❌ |
-| Base10| ❌ | ✔ | ❌ |
-| Base16| ❌ | ❌| ✔  |
-| Base32| ✔  | ❌| ✔  |
-| Base58| ❌ | ✔ | ❌ |
-| Base64| ✔  | ❌| ❌ |
+| 2 | ❌ | ✔ | ❌ |
+| 8 | ❌ | ✔ | ❌ |
+| 10| ❌ | ✔ | ❌ |
+| 16| ❌ | ❌| ✔  |
+| 32| ✔  | ❌| ✔  |
+| 58| ❌ | ✔ | ❌ |
+| 64| ✔  | ❌| ❌ |
 
-### Alternative Implementations
-
+### Included Alternatives
 - Base2
     + Base2ZC: Supports Bitcoin style zero compression.
 - Base16: Uppercase by default.
     + Base16Lower: Lowercase character set.
 - Base32: Uppercase by default. Padding by default.
     + Base32Lower: Lowercase character set.
-    + Base32Hex: See [https://en.wikipedia.org/wiki/Base32#base32hex](https://en.wikipedia.org/wiki/Base32#base32hex) for further info.
-    + ZBase32: See [https://en.wikipedia.org/wiki/Base32#z-base-32](https://en.wikipedia.org/wiki/Base32#z-base-32) for further info.
+    + Base32Hex: See [en.wikipedia.org](https://en.wikipedia.org/wiki/Base32#base32hex) for further info.
+    + ZBase32: See [en.wikipedia.org](https://en.wikipedia.org/wiki/Base32#z-base-32) for further info.
 - Base58: Uses Bitcoin character set by default.
     + Base58Flickr: Uses Flickrs character set.
 - Base64: Uppercase by default. Padding by default.
     + Base64Url: Url safe.
 
-### Supported Alphabets
+### Included Alphabets
 
 ```Haxe
-enum abstract Alphabet(String) {
+enum abstract Alphabet {
   public var BASE2 = '01';
   public var BASE8 = '01234567';
   public var BASE10 = '0123456789';
@@ -45,3 +45,7 @@ enum abstract Alphabet(String) {
   public var BASE64_Url = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 }
 ```
+
+### Notes
+
+The class [`base.BaseX`](https://github.com/skial/base/blob/master/src/base/BaseX.hx) is ported from [`cryptocoinjs/base-x`](https://github.com/cryptocoinjs/base-x) with the [`MIT`](https://github.com/cryptocoinjs/base-x#license-mit) license.
