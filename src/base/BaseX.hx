@@ -30,7 +30,7 @@ class BaseX {
     private function get_BASEMAP():Bytes {
         if (BASEMAP == null) {
             BASEMAP = Bytes.alloc(256);
-            for (i in 0...BASEMAP.length) BASEMAP.set(i, 255);
+            BASEMAP.fill(0, 255, 255);
         }
         return BASEMAP;
     }
@@ -38,6 +38,8 @@ class BaseX {
     public function new(alphabet:String) {
         ALPHABET = alphabet;
         if (ALPHABET.length >= 255) throw 'Alphabet is too long';
+
+        @:keep BASEMAP;
 
         for (i in 0...ALPHABET.length) {
             var x = ALPHABET.charAt(i);
@@ -49,14 +51,48 @@ class BaseX {
     }
 
     public function encode(source:Bytes):Bytes {
-        if (source.length == 0) return Bytes.alloc(0);
+        if (source.length == 0) return source;
 
         var data = source.getData();
+        
+        /*var digits = [0];
+
+        for (i in 0...source.length) {
+            var carry = data.fastGet(i);
+
+            for (j in 0...digits.length) {
+                carry += digits[j] << 8;
+                digits[j] = carry % BASE;
+                carry = Math.floor(carry / BASE);
+            }
+
+            while (carry > 0) {
+                digits.push(carry % BASE);
+                carry = Math.floor(carry / BASE);
+            }
+        }
+
+        var str = new BytesBuffer();
+
+        var k = 0;
+        while (data.fastGet(k) == 0 && k < source.length -1) {
+            str.addString(LEADER);
+            k++;
+        }
+
+        var q = digits.length-1;
+        while (q >= 0) {
+            str.addByte(BASEMAP.get(digits[q]));
+            q--;
+        }
+
+        return str.getBytes();*/
+
         var zeroes = 0;
         var length = 0;
         var pbegin = 0;
         var pend = source.length;
-
+        
         while (pbegin != pend && data.fastGet(pbegin) == 0) {
             pbegin++;
             zeroes++;
@@ -65,16 +101,15 @@ class BaseX {
         // Allocate enough space in big-endian base58 representation.
         var size = Math.floor((pend - pbegin) * iFACTOR + 1);
         var b58 = Bytes.alloc(size);
-
+        
         // Process the bytes.
         while (pbegin != pend) {
             var carry = data.fastGet(pbegin);
-
             // Apply "b58 = b58 * 256 + ch".
             var i = 0;
             var it = size - 1;
             while ((carry != 0 || i < length) && (it != -1)) {
-                carry += (b58.get(it) * 256);
+                carry += (256 * b58.get(it));
                 b58.set(it, carry % BASE);
                 carry = Math.floor(carry / BASE);
                 it--;
@@ -85,20 +120,25 @@ class BaseX {
             length = i;
             pbegin++;
         }
+        
 
         // Skip leading zeroes in base58 result.
         var it = size - length;
+        
         while (it != size && b58.get(it) == 0) {
             it++;
         }
+        
 
-        // Translate the result into a string.
+        // Translate the result into bytes.
         var str = new BytesBuffer();
         var leaderCode = LEADER.fastCodeAt(0);
-        for (i in 0...zeroes) str.addByte(leaderCode);
+        
+        for (_ in 0...zeroes) str.addByte(leaderCode);
 
         while (it < size) {
-            str.addByte(ALPHABET.fastCodeAt(b58.get(it)));
+            
+            str.addByte( ALPHABET.fastCodeAt(b58.get(it)) );
             ++it;
         }
 
@@ -172,8 +212,8 @@ class BaseX {
         return vch;
     }
 
-    public function decode(string:String) {
-        var bytes = decodeUnsafe(Bytes.ofString(string));
+    public function decode(string:Bytes) {
+        var bytes = decodeUnsafe(string);
         if (bytes.length != 0) return bytes;
 
         throw 'Non-base $BASE character';

@@ -5,6 +5,10 @@ import haxe.io.Bytes;
 @:asserts
 class BaseXSpec {
 
+    /**
+        The BaseX implementation uses bitcoin style leading zero compression.
+    **/
+
     public function new() {}
 
     @:variant("", "")
@@ -104,15 +108,15 @@ class BaseXSpec {
     @:variant("771b0c28608484562a292e5d5d2b30", "4LGYeWhyfrjUByibUqdVR")
     @:variant("78ff9a0e56f9e88dc1cd654b40d019", "4PLggs66qAdbmZgkaPihe")
     @:variant("6d691bdd736346aa5a0a95b373b2ab", "44Y6qTgSvRMkdqpQ5ufkN")
-    public function testBase58(input:String, output:String) {
-        return testBaseX("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz", input, output, asserts);
+    public function testBase58_hex(input:String, output:String) {
+        return testBaseX_hex("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz", input, output, asserts);
     }
 
     @:variant("0000000f", "000f")
     @:variant("000fff", "0fff")
     @:variant("ffff", "ffff")
-    public function testBase16(input:String, output:String) {
-        return testBaseX("0123456789abcdef", input, output, asserts);
+    public function testBase16_hex(input:String, output:String) {
+        return testBaseX_hex("0123456789abcdef", input, output, asserts);
     }
 
     @:variant("000f", "01111")
@@ -123,11 +127,11 @@ class BaseXSpec {
     @:variant("179eea7a", "10111100111101110101001111010")
     @:variant("6db825db", "1101101101110000010010111011011")
     @:variant("93976aa7", "10010011100101110110101010100111")
-    public function testBase2(input:String, output:String) {
-        return testBaseX("01", input, output, asserts);
+    public function testBase2_hex(input:String, output:String) {
+        return testBaseX_hex("01", input, output, asserts);
     }
 
-    @:exclude public function testBaseX(alphabet:String, hex:String, output:String) {
+    @:exclude public function testBaseX_hex(alphabet:String, hex:String, output:String) {
         var basex = new BaseX(alphabet);
 
         asserts.assert( basex.encode( Bytes.ofHex(hex) ).toString() == output );
@@ -136,4 +140,47 @@ class BaseXSpec {
         return asserts.done();
     }
 
+    @:variant("hello world", "StV1DL6CwTryKyV")
+    public function testBase58(input, output) {
+        return testBaseX("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz", input, output, asserts);
+    }
+
+    @:variant("h", "1101000")
+    @:variant("Decentralize everything!!", "1000100011001010110001101100101011011100111010001110010011000010110110001101001011110100110010100100000011001010111011001100101011100100111100101110100011010000110100101101110011001110010000100100001")
+    @:variant("yes mani !", "1111001011001010111001100100000011011010110000101101110011010010010000000100001")
+    @:variant("hello world", "110100001100101011011000110110001101111001000000111011101101111011100100110110001100100")
+    public function testBase2(input:String, output:String) {
+        #if (hxnodejs && basexjs)
+        var x = new BaseXJS("01");
+        trace( x.encode(new js.node.buffer.Buffer(input)), output );
+        trace( x.encode(js.node.buffer.Buffer.hxFromBytes(Bytes.ofString(input))), output );
+        #end
+        return testBaseX("01", input, output, asserts);
+    }
+
+    @:exclude public function testBaseX(alphabet:String, input:String, output:String) {
+        var basex = new BaseX(alphabet);
+        var inputBytes = Bytes.ofString(input);
+        var outputBytes = Bytes.ofString(output);
+        var encoded = basex.encode( inputBytes );
+        var decoded = basex.decode( outputBytes );
+
+        asserts.assert( encoded.length == outputBytes.length );
+        asserts.assert( encoded.toString() == output );
+        asserts.assert( decoded.toString() == input );
+
+        return asserts.done();
+    }
+
 }
+#if (hxnodejs && basexjs)
+@:jsRequire('./basex.js')
+extern class BaseXJS {
+
+    @:selfCall public function new(base:String);
+    public function decode(v:String):js.node.buffer.Buffer;
+    public function encode(v:js.node.buffer.Buffer):String;
+
+}
+
+#end

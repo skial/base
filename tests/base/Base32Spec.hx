@@ -13,10 +13,22 @@ class Base32Spec {
     //@:variant("\x00yes mani !", "AB4WK4ZANVQW42JAEE") // zero bytes are ignored by Bytes.{to/get}String
     //@:variant("\x00\x00yes mani !", "AAAHSZLTEBWWC3TJEAQQ")
     public function testBase32(input:String, output:String) {
-        var base16 = new Base32();
+        var base = new Base32();
 
-        asserts.assert( base16.encode(Bytes.ofString(input)).toString() == output );
-        asserts.assert( base16.decode(Bytes.ofString(output)).toString() == input );
+        asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
+        asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
+
+        return asserts.done();
+    }
+
+    @:variant("Decentralize everything!!", "et1sg3mqqt3gn5djxj11y3msci3817depfzgqejb")
+    @:variant("yes mani !", "xf1zgedpcfzg1ebb")
+    @:variant("hello world", "pb1sa5dxrb5s6hucco")
+    public function testZBase32(input:String, output:String) {
+        var base = new ZBase32();
+
+        asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
+        asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
 
         return asserts.done();
     }

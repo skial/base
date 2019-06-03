@@ -13,10 +13,10 @@ class Base16Spec {
     //@:variant("\x00yes mani !", "00796573206D616E692021") // zero bytes are ignored by Bytes.{to/get}String
     //@:variant("\x00\x00yes mani !", "0000796573206D616E692021")
     public function testBase16(input:String, output:String) {
-        var base16 = new Base16();
+        var base = new Base16();
 
-        asserts.assert( base16.encode(Bytes.ofString(input)).toString() == output );
-        asserts.assert( base16.decode(Bytes.ofString(output)).toString() == input );
+        asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
+        asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
 
         return asserts.done();
     }

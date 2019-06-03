@@ -1,9 +1,11 @@
 package base;
 
+import base.Alphabet.BASE10;
+
 class Base10 extends BaseX {
 
     public function new() {
-        super("0123456789");
+        super(BASE10);
     }
 
 }

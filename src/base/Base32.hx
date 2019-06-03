@@ -1,5 +1,6 @@
 package base;
 
+import base.Alphabet.BASE32;
 import haxe.io.BytesBuffer;
 
 using haxe.io.Bytes;
@@ -8,7 +9,7 @@ using haxe.io.Bytes;
 class Base32 extends BaseCode {
 
     private override function get_BASE():Int return 32;
-    private override function get_CHARS():String return "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567=";
+    private override function get_CHARS():String return '$BASE32=';
     private override function get_modulo():Int return 8;
 
 }

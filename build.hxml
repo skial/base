@@ -11,6 +11,7 @@
 
 --each
 
+#--macro includeFile("bin/basex.js")
 -lib hxnodejs
 -js bin/base.js
 
@@ -33,3 +34,11 @@
 --next
 
 -python bin/base.py
+
+--next
+
+-java bin/java
+
+--next
+
+-cs bin/cs

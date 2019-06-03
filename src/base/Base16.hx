@@ -1,6 +1,6 @@
 package base;
 
-import haxe.io.BytesBuffer;
+import base.Alphabet.BASE16;
 
 using haxe.io.Bytes;
 
@@ -8,8 +8,7 @@ using haxe.io.Bytes;
 class Base16 extends BaseCode {
 
     private override function get_BASE():Int return 16;
-    private override function get_CHARS():String return "0123456789ABCDEF";
-    
+    private override function get_CHARS():String return BASE16;
 
     public override function encode(bytes:Bytes):Bytes {
         return encodeBytes(bytes);

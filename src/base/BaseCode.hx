@@ -45,7 +45,6 @@ class BaseCode extends haxe.crypto.BaseCode {
     }
 
     public function decode(bytes:Bytes):Bytes {
-        trace(padding);
         return if (padding) {
             var data = bytes.getData();
             var buffer = new BytesBuffer();
