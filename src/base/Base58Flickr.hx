@@ -2,8 +2,10 @@ package base;
 
 import base.Alphabet.BASE58_Flickr;
 
-class Base58Flickr extends Base58 {
+class Base58Flickr {
 
-    private override function get_CHARS():String = BASE58_Flickr;
+    public function new() {
+        super(BASE58_Flickr);
+    }
 
 }
