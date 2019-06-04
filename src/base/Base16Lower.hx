@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE16_Lower;
+import base.Alphabet;
 
 class Base16Lower extends Base16 {
 

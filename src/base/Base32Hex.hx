@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE32_Hex;
+import base.Alphabet;
 
 class Base32Hex extends Base32 {
 

@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE58;
+import base.Alphabet;
 
 class Base58 extends BaseX {
 

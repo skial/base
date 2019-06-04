@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE64;
+import base.Alphabet;
 
 class Base64 extends BaseCode {
     private override function get_BASE():Int return 64;

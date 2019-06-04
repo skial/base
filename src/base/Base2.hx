@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE2;
+import base.Alphabet;
 
 using haxe.io.Bytes;
 

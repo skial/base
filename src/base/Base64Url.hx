@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE64_Url;
+import base.Alphabet;
 
 class Base64Url extends Base64 {
     

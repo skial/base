@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE32_Lower;
+import base.Alphabet;
 
 class Base32Lower extends Base32 {
 

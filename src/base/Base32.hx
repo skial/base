@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE32;
+import base.Alphabet;
 import haxe.io.BytesBuffer;
 
 using haxe.io.Bytes;

@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE32_Z;
+import base.Alphabet;
 
 class ZBase32 extends Base32 {
 

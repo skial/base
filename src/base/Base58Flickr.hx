@@ -1,6 +1,6 @@
 package base;
 
-import base.Alphabet.BASE58_Flickr;
+import base.Alphabet;
 
 class Base58Flickr extends BaseX {
 
