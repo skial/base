@@ -14,6 +14,7 @@ enum abstract Alphabet(String) from String to String {
     public var BASE32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
     public var BASE32_Lower = 'abcdefghijklmnopqrstuvwxyz234567';
     public var BASE32_Hex = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
+    public var BASE32_HexLower = '0123456789abcdefghijklmnopqrstuv';
     public var BASE32_Z = 'ybndrfg8ejkmcpqxot1uwisza345h769';
     public var BASE58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     public var BASE58_Flickr = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
