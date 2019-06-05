@@ -33,6 +33,18 @@ class Base64Spec {
         return asserts.done();
     }
 
+    @:variant("Decentralize everything!!", "RGVjZW50cmFsaXplIGV2ZXJ5dGhpbmchIQ")
+    @:variant("yes mani !", "eWVzIG1hbmkgIQ")
+    @:variant("hello world", "aGVsbG8gd29ybGQ")
+    public function testBase64Url_noPadding(input:String, output:String) {
+        var base = new Base64Url(false);
+
+        asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
+        asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
+
+        return asserts.done();
+    }
+
     @:variant("ff", "_w==")
     @:variant("69b73efeba", "abc-_ro=")
     public function testBase64Url_hex(input:String, output:String) {

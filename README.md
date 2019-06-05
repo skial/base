@@ -13,18 +13,18 @@
 | 64| ✔  | ❌| ❌ |
 
 ### Included Alternatives
-- Base2
-    + Base2ZC: Supports Bitcoin style zero compression.
-- Base16: Uppercase by default.
-    + Base16Lower: Lowercase character set.
-- Base32: Uppercase by default. Padding by default.
-    + Base32Lower: Lowercase character set.
-    + Base32Hex: See [en.wikipedia.org](https://en.wikipedia.org/wiki/Base32#base32hex) for further info.
-    + Base32HexLower: Lowercase hex character set.
-    + ZBase32: See [en.wikipedia.org](https://en.wikipedia.org/wiki/Base32#z-base-32) for further info.
-- Base58: Uses Bitcoin character set by default.
-    + Base58Flickr: Uses Flickrs character set.
-- Base64: Padding by default.
+- `Base2`
+    + `Base2ZC`: Supports Bitcoin style zero compression.
+- `Base16`: Uppercase by default.
+    + `Base16Lower`: Lowercase character set.
+- `Base32`: Uppercase by default. Padding by default.
+    + `Base32Lower`: Lowercase character set.
+    + `Base32Hex`: See [en.wikipedia.org](https://en.wikipedia.org/wiki/Base32#base32hex) for further info.
+    + `Base32HexLower`: Lowercase hex character set.
+    + `ZBase32`: See [en.wikipedia.org](https://en.wikipedia.org/wiki/Base32#z-base-32) for further info.
+- `Base58`: Uses Bitcoin character set by default.
+    + `Base58Flickr`: Uses Flickrs character set.
+- `Base64`: Padding by default.
     + Base64Url: Url safe.
 
 ### Included Alphabets

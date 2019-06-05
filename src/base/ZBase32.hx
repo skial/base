@@ -6,4 +6,8 @@ class ZBase32 extends Base32 {
 
     private override function get_CHARS():String return BASE32_Z;
 
+    public function new() {
+        super(false);
+    }
+
 }

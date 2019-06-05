@@ -13,15 +13,20 @@ class BaseCode extends haxe.crypto.BaseCode {
     public var BYTES(get, never):Bytes; 
     private function get_BYTES():Bytes return Bytes.ofString( get_CHARS().substring(0, BASE) );
 
-    private var padding(get, never):Bool;
+    @:isVar private var padding(get, set):Null<Bool>;
     private function get_padding():Bool {
-        return CHARS.lastIndexOf('=') == BASE;
+        if (padding == null) padding = CHARS.lastIndexOf('=') == BASE;
+        return padding;
+    }
+    private inline function set_padding(v:Bool):Bool {
+        return padding = v;
     }
 
     private var modulo(get, never):Int;
     private function get_modulo():Int return 8;
 
-    public function new() {
+    public function new(?padding:Bool = true) {
+        if (!padding) this.padding = false;
         super(BYTES);
     }
 
