@@ -9,6 +9,7 @@ class Main {
         Runner.run(TestBatch.make([
             new base.BaseXSpec(),
             new base.Base2Spec(),
+            new base.Base8Spec(),
             new base.Base16Spec(),
             new base.Base32Spec(),
             new base.Base64Spec(),

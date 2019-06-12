@@ -168,9 +168,9 @@ class BaseX {
         while (it != size && b256.get(it) == 0) {
             it++;
         }
-
+        
         var vch = Bytes.alloc(zeroes + (size - it));
-        vch.fill(0, zeroes, 0);
+        vch.fill(0, zeroes, 0x00);
 
         var j = zeroes;
         while (it != size) {

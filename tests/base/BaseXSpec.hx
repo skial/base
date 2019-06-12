@@ -150,12 +150,22 @@ class BaseXSpec {
     @:variant("yes mani !", "1111001011001010111001100100000011011010110000101101110011010010010000000100001")
     @:variant("hello world", "110100001100101011011000110110001101111001000000111011101101111011100100110110001100100")
     public function testBase2(input:String, output:String) {
-        #if (hxnodejs && basexjs)
+        #if (nodejs && basexjs)
         var x = new BaseXJS("01");
         trace( x.encode(new js.node.buffer.Buffer(input)), output );
-        trace( x.encode(js.node.buffer.Buffer.hxFromBytes(Bytes.ofString(input))), output );
+        //trace( x.encode(js.node.buffer.Buffer.hxFromBytes(Bytes.ofString(input))), output );
         #end
         return testBaseX("01", input, output, asserts);
+    }
+
+    @:variant("h", "150")
+    @:variant("hello world", "64145330661571007355734466144")
+    public function testBase8(input:String, output:String) {
+        #if (nodejs && basexjs)
+        var x = new BaseXJS("01234567");
+        trace( x.encode(new js.node.buffer.Buffer(input)), output );
+        #end
+        return testBaseX("01234567", input, output, asserts);
     }
 
     @:exclude public function testBaseX(alphabet:String, input:String, output:String) {
@@ -173,7 +183,7 @@ class BaseXSpec {
     }
 
 }
-#if (hxnodejs && basexjs)
+#if (nodejs && basexjs)
 @:jsRequire('./basex.js')
 extern class BaseXJS {
 

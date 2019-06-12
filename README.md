@@ -5,7 +5,7 @@
 | Base  | padding | zero compression | lower case |
 |- |- |- |-
 | 2 | ❌ | ✔ | ❌ |
-| 8 | ❌ | ✔ | ❌ |
+| 8 | ❌ | ❌ | ❌ |
 | 10| ❌ | ✔ | ❌ |
 | 16| ❌ | ❌| ✔  |
 | 32| ✔  | ❌| ✔  |
@@ -15,6 +15,8 @@
 ### Included Alternatives
 - `Base2`
     + `Base2ZC`: Supports Bitcoin style zero compression.
+- `Base8`
+    + `Base8ZC`: Supports Bitcoin style zero compression.
 - `Base16`: Uppercase by default.
     + `Base16Lower`: Lowercase character set.
 - `Base32`: Uppercase by default. Padding by default.

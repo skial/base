@@ -5,16 +5,16 @@ import haxe.io.Bytes;
 @:asserts
 class Base32Spec {
 
+    private var base = new Base32();
+
     public function new() {}
 
-    @:variant("Decentralize everything!!", "IRSWGZLOORZGC3DJPJSSAZLWMVZHS5DINFXGOIJB==")
-    @:variant("yes mani !", "PFSXGIDNMFXGSIBB=")
-    @:variant("hello world", "NBSWY3DPEB3W64TMMQ")
+    @:variant("Decentralize everything!!", "IRSWGZLOORZGC3DJPJSSAZLWMVZHS5DINFXGOIJB")
+    @:variant("yes mani !", "PFSXGIDNMFXGSIBB")
+    @:variant("hello world", "NBSWY3DPEB3W64TMMQ======")
     //@:variant("\x00yes mani !", "AB4WK4ZANVQW42JAEE") // zero bytes are ignored by Bytes.{to/get}String
     //@:variant("\x00\x00yes mani !", "AAAHSZLTEBWWC3TJEAQQ")
     public function testBase32(input:String, output:String) {
-        var base = new Base32();
-
         asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
         asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
 
@@ -28,7 +28,6 @@ class Base32Spec {
     //@:variant("\x00\x00yes mani !", "AAAHSZLTEBWWC3TJEAQQ")
     public function testBase32_noPadding(input:String, output:String) {
         var base = new Base32(false);
-        trace( @:privateAccess base.padding );
 
         asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
         asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
