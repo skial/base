@@ -41,4 +41,11 @@
 
 --next
 
+# Lix-pm installs 32bit binaries i think.
+# @see https://github.com/HaxeFoundation/haxe/issues/8388
+#-D jvm
+#-java bin/jvm
+
+#--next
+
 -cs bin/cs
