@@ -16,7 +16,7 @@ class Base64Spec {
         var base = new Base64();
 
         asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
-        asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
+        asserts.assert( base.decode(output).toString() == input );
 
         return asserts.done();
     }
@@ -28,7 +28,7 @@ class Base64Spec {
         var base = new Base64Url();
 
         asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
-        asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
+        asserts.assert( base.decode(output).toString() == input );
 
         return asserts.done();
     }
@@ -40,7 +40,7 @@ class Base64Spec {
         var base = new Base64Url(false);
 
         asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
-        asserts.assert( base.decode(Bytes.ofString(output)).toString() == input );
+        asserts.assert( base.decode(output).toString() == input );
 
         return asserts.done();
     }
@@ -51,7 +51,7 @@ class Base64Spec {
         var base = new Base64Url();
 
         asserts.assert( base.encode(Bytes.ofHex(input)).toString() == output );
-        asserts.assert( base.decode(Bytes.ofString(output)).toHex() == input );
+        asserts.assert( base.decode(output).toHex() == input );
 
         return asserts.done();
     }

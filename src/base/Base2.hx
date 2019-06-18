@@ -13,11 +13,11 @@ class Base2 extends BaseCode {
         super(false);
     }
 
-    public override function encode(bytes:Bytes):Bytes {
+    public override function encode(bytes:Bytes):Value {
         return encodeBytes(bytes);
     }
 
-    public override function decode(bytes:Bytes):Bytes {
+    public override function decode(bytes:Value):Bytes {
         return decodeBytes( bytes );
     }
 
