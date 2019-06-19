@@ -1,6 +1,7 @@
 package base;
 
 import haxe.io.Bytes;
+import haxe.io.BytesData;
 
 abstract Value(ValueObject) from ValueObject {
 
@@ -13,9 +14,12 @@ abstract Value(ValueObject) from ValueObject {
     @:from static inline function fromBytes(value:Bytes):Value {
         return new ValueBytes(value);
     }
+    @:from static inline function fromBytesData(value:BytesData):Value {
+        return new ValueBytesData(value);
+    }
 }
 
-#if !cs
+#if !(cs || java)
 @:remove
 #end
 interface ValueObject {
@@ -45,4 +49,22 @@ private class ValueString implements ValueObject {
 
     public inline function asBytes():Bytes return Bytes.ofString(this.value);
     public inline function asString():String return this.value;
+}
+
+@:structInit
+private class ValueBytesData implements ValueObject {
+    var value:BytesData;
+
+    public inline function new(v:BytesData) {
+        value = v;
+    }
+
+    public inline function asBytes():Bytes return Bytes.ofData(this.value);
+    public inline function asString():String return
+    #if py
+        this.value.decode()
+    #else
+        Bytes.ofData(this.value).toString()
+    #end
+    ;
 }

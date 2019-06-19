@@ -13,6 +13,10 @@ typedef Base64 =
     CsBase64
 #elseif python
     PyBase64
+#elseif php
+    PhpBase64
+#elseif java
+    JavaBase64
 #else
     XBase64
 #end
@@ -44,6 +48,26 @@ class PyBase64 {
                 value.asBytes().getData()
             )
         );
+    }
+}
+#elseif php
+class PhpBase64 {
+    public function new(padding:Bool = false) {}
+    public inline function encode(bytes:Bytes):Value {
+        return php.Global.base64_encode(bytes.toString());
+    }
+    public inline function decode(value:Value):Bytes {
+        return Bytes.ofString(php.Global.base64_decode(value, true));
+    }
+}
+#elseif java
+class JavaBase64 {
+    public function new(padding:Bool = false) {}
+    public inline function encode(bytes:Bytes):Value {
+        return java.util.Base64.getEncoder().encode(bytes.getData());
+    }
+    public inline function decode(value:Value):Bytes {
+        return Bytes.ofData(java.util.Base64.getDecoder().decode(value));
     }
 }
 #end
