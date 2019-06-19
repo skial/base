@@ -30,7 +30,7 @@ class BaseCode extends haxe.crypto.BaseCode {
         super(BYTES);
     }
 
-    public function encode(bytes:Bytes):Bytes {
+    public function encode(bytes:Bytes):Value {
         var _buffer = new BytesBuffer();
         _buffer.add( encodeBytes(bytes) );
 
@@ -49,7 +49,8 @@ class BaseCode extends haxe.crypto.BaseCode {
         return _buffer.getBytes();
     }
 
-    public function decode(bytes:Bytes):Bytes {
+    public function decode(value:Value):Bytes {
+        var bytes:Bytes = value;
         return if (padding) {
             var data = bytes.getData();
             var buffer = new BytesBuffer();

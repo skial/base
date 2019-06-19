@@ -12,7 +12,7 @@ class Base32 extends BaseCode {
     private override function get_CHARS():String return '$BASE32=';
     private override function get_modulo():Int return 8;
 
-    override public function encode(bytes:Bytes):Bytes {
+    override public function encode(bytes:Bytes):Value {
         var _buffer = new BytesBuffer();
         _buffer.add( encodeBytes(bytes) );
 
