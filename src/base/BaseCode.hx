@@ -53,16 +53,13 @@ class BaseCode extends haxe.crypto.BaseCode {
         var bytes:Bytes = value;
         return if (padding) {
             var data = bytes.getData();
-            var buffer = new BytesBuffer();
             var length = bytes.length;
             
             while (data.fastGet(length-1) == '='.code) {
                 length--;
             }
-            
-            buffer.add( bytes.sub(0, length) );
 
-            decodeBytes( buffer.getBytes() );
+            decodeBytes( bytes.sub(0, length) );
 
         } else {
             decodeBytes( bytes );

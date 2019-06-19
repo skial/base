@@ -172,8 +172,8 @@ class BaseXSpec {
         var basex = new BaseX(alphabet);
         var inputBytes = Bytes.ofString(input);
         var outputBytes = Bytes.ofString(output);
-        var encoded = basex.encode( inputBytes );
-        var decoded = basex.decode( outputBytes );
+        var encoded:Bytes = basex.encode( inputBytes );
+        var decoded:Bytes = basex.decode( outputBytes );
 
         asserts.assert( encoded.length == outputBytes.length );
         asserts.assert( encoded.toString() == output );

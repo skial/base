@@ -21,6 +21,20 @@ class Base64Spec {
         return asserts.done();
     }
 
+    @:variant("Decentralize everything!!", "RGVjZW50cmFsaXplIGV2ZXJ5dGhpbmchIQ")
+    @:variant("yes mani !", "eWVzIG1hbmkgIQ")
+    @:variant("hello world", "aGVsbG8gd29ybGQ")
+    //@:variant("\x00yes mani !", "AHllcyBtYW5pICE=") // zero bytes are ignored by Bytes.{to/get}String
+    //@:variant("\x00\x00yes mani !", "AAB5ZXMgbWFuaSAh")
+    public function testBase64_noPadding(input:String, output:String) {
+        var base = new Base64(false);
+
+        asserts.assert( base.encode(Bytes.ofString(input)).toString() == output );
+        asserts.assert( base.decode(output).toString() == input );
+
+        return asserts.done();
+    }
+
     @:variant("Decentralize everything!!", "RGVjZW50cmFsaXplIGV2ZXJ5dGhpbmchIQ==")
     @:variant("yes mani !", "eWVzIG1hbmkgIQ==")
     @:variant("hello world", "aGVsbG8gd29ybGQ=")
