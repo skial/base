@@ -51,7 +51,7 @@ class BaseX {
         }
     }
 
-    public function encode(source:Bytes):Bytes {
+    public function encode(source:Bytes):Value {
         if (source.length == 0) return source;
 
         var data = source.getData();
@@ -113,8 +113,9 @@ class BaseX {
         return str.getBytes();
     }
 
-    public function decodeUnsafe(source:Bytes):Bytes {
+    public function decodeUnsafe(source:Value):Bytes {
         var EMPTY = Bytes.alloc(0);
+        var source:Bytes = source;
         if (source.length == 0) return EMPTY;
         var data = source.getData();
 
@@ -180,7 +181,7 @@ class BaseX {
         return vch;
     }
 
-    public function decode(string:Bytes) {
+    public function decode(string:Value) {
         var bytes = decodeUnsafe(string);
         if (bytes.length != 0) return bytes;
 
